@@ -1,0 +1,375 @@
+[
+    {
+        "id": 886334,
+        "name": "グラデーションタイツ/gradient pantyhose",
+        "description": "<p>The strength of Lora is recommended to be around 1.0. It is difficult to specify a detailed color.</p>",
+        "allowNoCredit": true,
+        "allowCommercialUse": ["RentCivit"],
+        "allowDerivatives": true,
+        "allowDifferentLicense": true,
+        "type": "LoCon",
+        "minor": false,
+        "poi": false,
+        "nsfw": false,
+        "nsfwLevel": 2,
+        "cosmetic": null,
+        "stats": {
+            "downloadCount": 7,
+            "favoriteCount": 0,
+            "thumbsUpCount": 4,
+            "thumbsDownCount": 0,
+            "commentCount": 0,
+            "ratingCount": 0,
+            "rating": 0,
+            "tippedAmountCount": 0
+        },
+        "creator": {
+            "username": "bolero537",
+            "image": null
+        },
+        "tags": ["clothing"],
+        "modelVersions": [
+            {
+                "id": 992156,
+                "index": 0,
+                "name": "v1.0 XL(illustrious)",
+                "baseModel": "Illustrious",
+                "baseModelType": null,
+                "publishedAt": "2024-10-25T05:49:45.664Z",
+                "availability": "Public",
+                "nsfwLevel": 2,
+                "description": null,
+                "trainedWords": ["gradient pantyhose, pantyhose"],
+                "stats": {
+                    "downloadCount": 7,
+                    "ratingCount": 0,
+                    "rating": 0,
+                    "thumbsUpCount": 4,
+                    "thumbsDownCount": 0
+                },
+                "files": [
+                    {
+                        "id": 898086,
+                        "sizeKB": 62576.53125,
+                        "name": "gradient pantyhose_illustrious_V1.0.safetensors",
+                        "type": "Model",
+                        "pickleScanResult": "Success",
+                        "pickleScanMessage": "No Pickle imports",
+                        "virusScanResult": "Success",
+                        "virusScanMessage": null,
+                        "scannedAt": "2024-10-25T05:50:40.452Z",
+                        "metadata": {
+                            "format": "SafeTensor",
+                            "size": null,
+                            "fp": null
+                        },
+                        "hashes": {
+                            "AutoV1": "02925C04",
+                            "AutoV2": "A3E673578D",
+                            "SHA256": "A3E673578DE6C3A20EDDE0477283E25A6D21C3224061678C9346006BE37FA5E1",
+                            "CRC32": "201F825C",
+                            "BLAKE3": "67EAF145EFECE5D0B94499E37D235F72044233D9A38D740D09CCED1872161489",
+                            "AutoV3": "FC2255808415"
+                        },
+                        "downloadUrl": "https://civitai.com/api/download/models/992156",
+                        "primary": true
+                    }
+                ],
+                "images": [
+                    {
+                        "id": 36442849,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/d16b89f9-dc9d-4547-b9c4-6191f2e8a2eb/width=450/36442849.jpeg",
+                        "nsfwLevel": 2,
+                        "width": 920,
+                        "height": 1224,
+                        "hash": "UFO3|U_3?b~pnNtRD%D%~p9GRjt74oxu?btQ",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36442850,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/cfa48408-51c1-4a8d-ab58-0468f7bddef2/width=450/36442850.jpeg",
+                        "nsfwLevel": 2,
+                        "width": 920,
+                        "height": 1224,
+                        "hash": "UJNK6dIU?v~qMyxu0KD%_3xuo2M{4nIU-p%M",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36442858,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/821f2da5-369c-43e8-9645-71cb7d2e53d6/width=450/36442858.jpeg",
+                        "nsfwLevel": 2,
+                        "width": 920,
+                        "height": 1224,
+                        "hash": "URN,xm%M?^NG.7ofoKf6?vNGI9xa$*e.I:tR",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36442859,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/4834366a-3189-4672-8e0d-af02624db612/width=450/36442859.jpeg",
+                        "nsfwLevel": 2,
+                        "width": 920,
+                        "height": 1224,
+                        "hash": "UIM@4W-quPx[9vtRZ$R5.9I9Q,yE?GIpTK%2",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    }
+                ],
+                "downloadUrl": "https://civitai.com/api/download/models/992156"
+            }
+        ]
+    },
+    {
+        "id": 570716,
+        "name": "krekkov style LoRA for PonyXL/Illustrious",
+        "description": "<p>No need for activation tag - Will remove if requested</p>",
+        "allowNoCredit": true,
+        "allowCommercialUse": ["Image", "RentCivit", "Rent", "Sell"],
+        "allowDerivatives": true,
+        "allowDifferentLicense": true,
+        "type": "LORA",
+        "minor": false,
+        "poi": false,
+        "nsfw": true,
+        "nsfwLevel": 60,
+        "cosmetic": null,
+        "stats": {
+            "downloadCount": 995,
+            "favoriteCount": 0,
+            "thumbsUpCount": 199,
+            "thumbsDownCount": 0,
+            "commentCount": 2,
+            "ratingCount": 0,
+            "rating": 0,
+            "tippedAmountCount": 0
+        },
+        "creator": {
+            "username": "THEANTLERS",
+            "image": null
+        },
+        "tags": ["anime", "style", "artists", "ponyxl"],
+        "modelVersions": [
+            {
+                "id": 990541,
+                "index": 0,
+                "name": "Illustrious",
+                "baseModel": "Illustrious",
+                "baseModelType": null,
+                "publishedAt": "2024-10-24T18:23:07.752Z",
+                "availability": "Public",
+                "nsfwLevel": 60,
+                "description": null,
+                "trainedWords": ["krekkov"],
+                "stats": {
+                    "downloadCount": 76,
+                    "ratingCount": 0,
+                    "rating": 0,
+                    "thumbsUpCount": 16,
+                    "thumbsDownCount": 0
+                },
+                "files": [
+                    {
+                        "id": 896554,
+                        "sizeKB": 124736.2734375,
+                        "name": "krekkovILLUS.safetensors",
+                        "type": "Model",
+                        "pickleScanResult": "Success",
+                        "pickleScanMessage": "No Pickle imports",
+                        "virusScanResult": "Success",
+                        "virusScanMessage": null,
+                        "scannedAt": "2024-10-24T18:20:40.902Z",
+                        "metadata": {
+                            "format": "SafeTensor",
+                            "size": null,
+                            "fp": null
+                        },
+                        "hashes": {
+                            "AutoV1": "471314FB",
+                            "AutoV2": "5EEE3BCC84",
+                            "SHA256": "5EEE3BCC84C16BF03E655A26397A5623D9B63908ED867F77C849DCD2005E5329",
+                            "CRC32": "ADC49C0C",
+                            "BLAKE3": "379EB3A93B913D7AD316F0F7BC05B3358C480CB8333B90AF14D4420F2F07A0CC",
+                            "AutoV3": "BA0DA73A28EC"
+                        },
+                        "downloadUrl": "https://civitai.com/api/download/models/990541",
+                        "primary": true
+                    }
+                ],
+                "images": [
+                    {
+                        "id": 36349349,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/105737f3-76b2-49af-9aad-6ff7f9fd71b9/width=450/36349349.jpeg",
+                        "nsfwLevel": 16,
+                        "width": 888,
+                        "height": 1256,
+                        "hash": "UDDSRNxuR$n$~pozIAM{-oxuIUIU^jozNaM{",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349359,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/a4e87554-5f7e-458f-b966-a98dd2995f4a/width=450/36349359.jpeg",
+                        "nsfwLevel": 16,
+                        "width": 1024,
+                        "height": 1416,
+                        "hash": "UML481s+*0^kxC.S9ZeT5QyDVr%2jti^R5bb",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349341,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/46b6da8e-38f0-4656-bb2c-421a21d5a23c/width=450/36349341.jpeg",
+                        "nsfwLevel": 16,
+                        "width": 1368,
+                        "height": 888,
+                        "hash": "UCGHo3tQ01NH36SeD+M|b;-AICs:}rSh-pxt",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349342,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/43c6838d-d42b-4343-b011-341542812c26/width=450/36349342.jpeg",
+                        "nsfwLevel": 8,
+                        "width": 1416,
+                        "height": 1024,
+                        "hash": "UDFOyAuPw[4T-:%fD%00WUt8M|VrELNG-V-o",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349344,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/7a1b889e-117d-4fa2-97c0-3d5672519b1c/width=450/36349344.jpeg",
+                        "nsfwLevel": 16,
+                        "width": 1416,
+                        "height": 1024,
+                        "hash": "UELM@l4T00DN7~~Cib9ZOskr^40g_2NwIo-U",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349343,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/f32494d2-29bd-4cd0-8ad1-141dfe55411e/width=450/36349343.jpeg",
+                        "nsfwLevel": 16,
+                        "width": 936,
+                        "height": 1376,
+                        "hash": "U6D[|Z1z5Q}XC,RPDONx_N}@4TAZKOtS9[nh",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349351,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/334ac038-851a-4166-8239-3150d8e7439b/width=450/36349351.jpeg",
+                        "nsfwLevel": 8,
+                        "width": 1144,
+                        "height": 1272,
+                        "hash": "UBI:tL05I+00^g59-n0g00XMxc?a|@-.Dk-.",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349353,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/0e1b2120-9df8-42a3-8240-0a16c207d507/width=450/36349353.jpeg",
+                        "nsfwLevel": 16,
+                        "width": 1416,
+                        "height": 968,
+                        "hash": "USLD_g^*9^FzLM%grqa$DiyDRjwI~AS~M{of",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349355,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/396738a8-127f-4a2a-9adc-4b119d0ac346/width=450/36349355.jpeg",
+                        "nsfwLevel": 16,
+                        "width": 1144,
+                        "height": 1272,
+                        "hash": "UPK1zc-AB;Bp0f_N-U-p+ZpcaJ#R*Jm,RjOs",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349357,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/3e9b4089-b95f-45a8-b9e8-83074fb8ebb3/width=450/36349357.jpeg",
+                        "nsfwLevel": 4,
+                        "width": 1144,
+                        "height": 1272,
+                        "hash": "UsLEpTt7*0ogOuWBNHbI9vayRPj[Xnof%1ay",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349360,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/dbe0ff31-3be2-4e74-9b59-95c0335924fc/width=450/36349360.jpeg",
+                        "nsfwLevel": 16,
+                        "width": 1024,
+                        "height": 1416,
+                        "hash": "UIG*QakD00ni~VbIv}M|0efl~BM|$yWW%Loe",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349362,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/175b38e5-acd4-4400-a1ec-e9346aea85ed/width=450/36349362.jpeg",
+                        "nsfwLevel": 8,
+                        "width": 1024,
+                        "height": 1416,
+                        "hash": "UCJ7dl0e01-U2W-p}@tR0f%2?bIos8%2n%9Z",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349363,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/3df866dd-16dd-4ff9-a6cc-75807282fc37/width=450/36349363.jpeg",
+                        "nsfwLevel": 16,
+                        "width": 1024,
+                        "height": 1416,
+                        "hash": "UULNur%1yX_3_NibVsS3o}IU$hs,EMx]ofSh",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349365,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/260f4670-7396-48e9-ad8b-3ae51b6ea7c1/width=450/36349365.jpeg",
+                        "nsfwLevel": 8,
+                        "width": 1024,
+                        "height": 1416,
+                        "hash": "UpOpGWx]_NRP.7x]o1V@xukWM{aeRjVsxakW",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    },
+                    {
+                        "id": 36349763,
+                        "url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/a5a19eeb-ac77-42c2-a546-519f4a54d04d/width=450/36349763.jpeg",
+                        "nsfwLevel": 8,
+                        "width": 1024,
+                        "height": 1416,
+                        "hash": "U8GQ@3M}0J57~9R.xZE200ov$--U0Nxs0hxs",
+                        "type": "image",
+                        "hasMeta": true,
+                        "onSite": false
+                    }
+                ],
+                "downloadUrl": "https://civitai.com/api/download/models/990541"
+            }
+        ]
+    }
+]

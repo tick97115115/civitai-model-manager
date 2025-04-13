@@ -1,0 +1,7 @@
+{
+    "db_uri": "sqlite:///C:\\Users\\APboi\\source\\repos\\civitai-model-manager\\src\\civitai_model_manager\\db.sqlite3",
+    "resources_folder": "D:\\AI_Drawer\\models",
+    "proxy": "http://127.0.0.1:17890",
+    "api_key": "",
+    "gopeed_url": "http://127.0.0.1:9999"
+}

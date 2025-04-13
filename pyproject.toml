@@ -1,0 +1,30 @@
+[project]
+name = "civitai-model-manager"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Pyon~ Pyon~~", email = "32931796+tick97115115@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "civitai-api==3.0.0",
+    "fastapi[standard]>=0.115.12",
+    "gospeed-api>=3.0.1",
+    "pydantic-settings>=2.8.1",
+    "pydash>=8.0.5",
+    "sqlmodel>=0.0.24",
+]
+
+[project.scripts]
+civitai-model-manager = "civitai_model_manager:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+]
