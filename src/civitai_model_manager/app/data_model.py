@@ -1,6 +1,5 @@
 from enum import StrEnum
-from pydantic import BaseModel, ConfigDict, StrictInt, HttpUrl
-from datetime import datetime
+from pydantic import BaseModel, ConfigDict
 
 class CivitAI_Model_Type(StrEnum):
     Checkpoint = 'Checkpoint'
@@ -21,11 +20,11 @@ class CivitAI_Model_Type(StrEnum):
     Other = 'Other'
 
 class CivitAI_Image(BaseModel):
-    id: StrictInt
-    url: HttpUrl
-    nsfwLevel: StrictInt
-    width: StrictInt
-    height: StrictInt
+    id: int
+    url: str
+    nsfwLevel: int
+    width: int
+    height: int
     hash: str
     type: str
 
@@ -37,13 +36,13 @@ class CivitAI_File_Metadata(BaseModel):
     model_config = ConfigDict(extra='allow')
 
 class CivitAI_File(BaseModel):
-    id: StrictInt
+    id: int
     sizeKB: float
     name: str
     type: str
-    scannedAt: None | datetime
+    scannedAt: None | str # ISO8061
     metadata: CivitAI_File_Metadata
-    downloadUrl: HttpUrl
+    downloadUrl: str
 
     model_config = ConfigDict(extra='allow')
 
@@ -52,31 +51,31 @@ class CivitAI_ModelVersion_Availability(StrEnum):
     Public = 'Public'
 
 class CivitAI_ModelVersion(BaseModel):
-    id: StrictInt
-    index: StrictInt
+    id: int
+    index: int
     name: str
     baseModel: str
     baseModelType: None | str
-    publishedAt: None | datetime # "2024-01-30T00:24:15.582Z",
+    publishedAt: None | str # "2024-01-30T00:24:15.582Z", ISO8061
     availability: CivitAI_ModelVersion_Availability
-    nsfwLevel: StrictInt
+    nsfwLevel: int
     description: None | str # HTML string
     trainedWords: list[str]
     stats: dict
     files: list[CivitAI_File]
     images: list[CivitAI_Image]
-    downloadUrl: HttpUrl
+    downloadUrl: str
 
     model_config = ConfigDict(extra='allow')
 
 class CivitAI_ModelId(BaseModel):
-    id: StrictInt
+    id: int
     name: str
     description: None | str
     type: CivitAI_Model_Type
     poi: bool
     nsfw: bool
-    nsfwLevel: StrictInt
+    nsfwLevel: int
     # cosmetic: None
     stats: dict
     tags: list[str]
