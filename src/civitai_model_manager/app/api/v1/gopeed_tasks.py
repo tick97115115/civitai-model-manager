@@ -1,7 +1,6 @@
 
 from typing import Sequence
 from pathlib import Path
-from civitai_model_manager.startup import app, async_httpx_client
 import httpx
 from sqlmodel import select
 from pydantic import StrictInt
@@ -11,7 +10,7 @@ import pydash as _
 from ...db.civitai_table import ModelVersionImage, ModelVersion
 from ...db.gopeed_table import ModelVersionGopeedTask, ModelVersionFileGopeedTask, ModelVersionImageGopeedTask
 from ...data_model import API_Response_V1, CivitAI_ModelId
-from ...dependencies import DbSessionDep, get_db_session
+from ...dependencies import DbSessionDep, get_db_session, app, AsyncHttpxClientDep
 
 class TaskConsumer:
     current_task: None | ModelVersionGopeedTask = None
@@ -71,7 +70,7 @@ def add_task(model_id: CivitAI_ModelId, version_id: StrictInt, db_session: DbSes
         db_session.commit()
 
 @app.get('/api/v1/gopeed_tasks/{version_id}/images/download')
-async def download_image(version_id: StrictInt, db_session: DbSessionDep):
+async def download_image(version_id: StrictInt, db_session: DbSessionDep, async_httpx_client: AsyncHttpxClientDep):
     statement = select(ModelVersionGopeedTask).where(ModelVersionGopeedTask.version_id == version_id)
     result = db_session.exec(statement)
     model_version = db_session.exec(select(ModelVersion).where(ModelVersion.id == version_id)).first()

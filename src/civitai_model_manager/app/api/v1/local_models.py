@@ -3,8 +3,7 @@ from sqlmodel import select
 from pydantic import StrictInt
 from ...data_model import CivitAI_ModelId
 from ...db.civitai_table import Model_Id, ModelVersion, Model_Tag, ModelIdTagLink
-from civitai_model_manager.startup import app
-from ...dependencies import DbSessionDep, get_db_session
+from ...dependencies import DbSessionDep, get_db_session, app
 from ...data_model import API_Response_V1
 import pydash as _
 
@@ -110,7 +109,7 @@ def update_model_id(model_id: CivitAI_ModelId, model_id_record: Model_Id, db_ses
     model_id_record.type = model_id.type
     model_id_record.nsfw = model_id.nsfw
     model_id_record.nsfw_level = model_id.nsfwLevel
-    model_id_record.api_info_model_id = model_id
+    model_id_record.api_info_model_id = model_id.model_dump()
     db_tags = [db_tag.name for db_tag in model_id_record.tags]
     tags_not_in_model_id = _.difference(model_id.tags, db_tags)
     for lacked_tag in tags_not_in_model_id:

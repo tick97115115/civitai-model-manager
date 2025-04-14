@@ -1,4 +1,4 @@
-from fastapi import Depends
+from fastapi import Depends, FastAPI
 from sqlmodel import create_engine, Session, SQLModel
 from sqlalchemy import Engine
 from contextlib import contextmanager
@@ -14,6 +14,8 @@ from os.path import join, dirname, exists
 from urllib.parse import urljoin
 import json
 from gospeed_api.index import GospeedAPI
+
+app = FastAPI()
 
 # router = APIRouter()
 

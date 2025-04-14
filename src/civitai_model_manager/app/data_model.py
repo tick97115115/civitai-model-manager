@@ -1,9 +1,6 @@
 from enum import StrEnum
 from pydantic import BaseModel, ConfigDict, StrictInt, HttpUrl
 from datetime import datetime
-from pathlib import Path
-# from civitai_model_manager.startup import settings
-import json
 
 class CivitAI_Model_Type(StrEnum):
     Checkpoint = 'Checkpoint'
@@ -90,18 +87,3 @@ class CivitAI_ModelId(BaseModel):
 class API_Response_V1(BaseModel):
     code: int
     message: str
-    
-# if __name__ == "__main__":
-#     from main import engine, ApiInfo
-#     from sqlmodel import Session, select
-    
-#     with Session(engine) as session:
-#         # 这里可以添加一些测试代码
-#         statement = select(ApiInfo)
-#         results = session.exec(statement)
-#         for item in results:
-#             try:
-#                 model = CivitAI_ModelId.model_validate(item.api_info_json)
-#             except Exception as e:
-#                 print(f"Error validating model: {e}")
-#                 continue
