@@ -132,9 +132,11 @@ class Settings:
             contents = await f.write(self.json_data.model_dump_json(indent=2))
     
     async def check_gopeed_service(self):
-        response = httpx.get(urljoin(settings.gopeed_url, '/api/v1/info'))
-        if response.status_code != 200:
-            raise GopeedServiceNotWorking(msg="gopeed service not working")
+        settings_data = await self.get_json_settings_data()
+        async with httpx.AsyncClient() as async_httpx_client:
+            response = await async_httpx_client.get(urljoin(settings_data.gopeed_url, '/api/v1/info'))
+            if response.status_code != 200:
+                raise GopeedServiceNotWorking(msg="gopeed service not working")
         
     async def check_settings(self):
         settings_data = await self.get_json_settings_data()
