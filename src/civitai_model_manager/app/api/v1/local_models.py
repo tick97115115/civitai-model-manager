@@ -1,5 +1,5 @@
 from typing import Sequence
-from sqlmodel import select
+from sqlmodel import select, col
 from pydantic import StrictInt
 from ...data_model import CivitAI_ModelId
 from ...db.civitai_table import Model_Id, ModelVersion, Model_Tag, ModelIdTagLink
@@ -47,7 +47,7 @@ class Find_Tags_Response(API_Response_V1):
     data: Sequence[Model_Tag]
 
 def find_tags(tags: list[str], db_session: DbSessionDep) -> Find_Tags_Response:
-    statement = select(Model_Tag).where(Model_Tag.name in tags)
+    statement = select(Model_Tag).where(col(Model_Tag.name).in_(tags))
     result = db_session.exec(statement)
     return Find_Tags_Response(
         code=200,
@@ -60,7 +60,7 @@ class Find_Model_Ids_By_Tags_Response(API_Response_V1):
 
 @app.post("/api/v1/tags", response_model=Find_Model_Ids_By_Tags_Response)
 def find_model_ids_by_tags(tags: list[str], db_session: DbSessionDep) -> Find_Model_Ids_By_Tags_Response:
-    statement = select(Model_Id).join(ModelIdTagLink).join(Model_Tag).where(Model_Tag.name in tags).distinct()
+    statement = select(Model_Id).join(ModelIdTagLink).join(Model_Tag).where(col(Model_Tag.name).in_(tags)).distinct()
     result = db_session.exec(statement)
     return Find_Model_Ids_By_Tags_Response(
         code=200,

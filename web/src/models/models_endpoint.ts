@@ -22,8 +22,8 @@ export const modelVersion_file = type({
   name: "string",
   type: "string",
   metadata: {
-    "fp?": "string", // '"fp8" | "fp16" | "fp32"',
-    "size?": "string", // '"full" | "pruned"',
+    "fp?": "string | null", // '"fp8" | "fp16" | "fp32"',
+    "size?": "string | null", // '"full" | "pruned"',
     format: "string", // '"SafeTensor" | "PickleTensor" | "Other" | "Diffusers" | "GGUF"',
   },
   scannedAt: "string | null", //ISO 8061
@@ -52,7 +52,7 @@ export const model_version = type({
   publishedAt: "string.date", //ISO 8061
   availability: "'EarlyAccess' | 'Public'",
   nsfwLevel: "number.integer",
-  description: "string", //html doc strings
+  description: "string | null", //html doc strings
   trainedWords: "string[]",
   stats: {
     downloadCount: "number.integer",
@@ -70,7 +70,7 @@ export type ModelIdEndpointModelVersion = typeof model_version.infer;
 import { creators_response_creator } from "./creators_endpoint";
 // https://www.jsondiff.com/ 找到共有属性名
 
-export const modelId_response = type({
+export const model_id = type({
   id: "number.integer",
   name: "string",
   description: "string | null",
@@ -97,10 +97,10 @@ export const modelId_response = type({
   tags: "string[]",
   modelVersions: model_version.array(),
 });
-export type ModelIdResponse = typeof modelId_response.infer;
+export type ModelId = typeof model_id.infer;
 
 export const models_response = type({
-  items: modelId_response.array(),
+  items: model_id.array(),
   metadata: {
     "totalItems?": "number.integer",
     "currentPage?": "number.integer",

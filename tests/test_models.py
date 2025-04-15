@@ -78,3 +78,11 @@ def test_sql_model_instantiation(model_id_data, session: Session):
     session.refresh(model_id_)
     
     assert model_id_data
+
+def test_in_operator_in_sqlmodel(session: Session):
+    from src.civitai_model_manager.app.api.v1.local_models import find_tags
+    res = find_tags(tags=['test'], db_session=session)
+    assert len(res.data) == 0
+
+    res = find_tags(tags=['clothing'], db_session=session)
+    assert len(res.data) == 1
