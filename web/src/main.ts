@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import '@/assets/styles/index.less' // global css
 
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
