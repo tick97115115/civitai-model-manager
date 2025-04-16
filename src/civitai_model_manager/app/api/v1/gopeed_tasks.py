@@ -49,7 +49,7 @@ def add_task(model_id: CivitAI_ModelId, version_id: StrictInt, db_session: DbSes
             model_version_api_info=model_version,
             image_tasks=[],
             file_tasks=[]
-        ) 
+        )
         for file in model_version.files:
             file_task = ModelVersionFileGopeedTask(
                 file_id=file.id,

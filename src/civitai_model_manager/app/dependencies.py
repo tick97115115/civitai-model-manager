@@ -102,9 +102,9 @@ class SettingsJsonModel(BaseSettings):
     gopeed_url: str = ''
 
 class Settings:
-    def __init__(self, settings_file_path: Path = settings_file):
+    def __init__(self, settings_file_path: Path = settings_file, json_data: None | SettingsJsonModel = None):
         self.settings_file_path = settings_file_path
-        self.json_data : None | SettingsJsonModel = None
+        self.json_data: None | SettingsJsonModel = json_data
 
     async def read_from_file(self):
         if not self.settings_file_path.exists():
@@ -158,6 +158,7 @@ class Settings:
         # check database
         # if not exists(settings.db_uri):
         #     raise DatabaseNotFound(msg="database doesn't exists")
+    
 
 _settings = Settings()
 

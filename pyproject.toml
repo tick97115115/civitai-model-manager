@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
+    "blake3>=1.0.4",
     "civitai-api==3.0.0",
     "fastapi[standard]>=0.115.12",
     "gospeed-api>=3.0.1",
