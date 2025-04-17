@@ -14,6 +14,7 @@ from os.path import join, dirname, exists
 from urllib.parse import urljoin
 import json
 from gospeed_api.index import GospeedAPI
+from .data_model import CivitAI_ModelId, CivitAI_ModelVersion
 
 app = FastAPI()
 
@@ -151,14 +152,10 @@ class Settings:
             raise GopeedServiceNotFound(msg="gopeed service url not found")
         
         # check if gopeed service is working
-        response = httpx.get(urljoin(settings_data.gopeed_url, '/api/v1/info'))
-        if response.status_code != 200:
-            raise GopeedServiceNotWorking(msg="gopeed service not working")
-        
-        # check database
-        # if not exists(settings.db_uri):
-        #     raise DatabaseNotFound(msg="database doesn't exists")
-    
+        async with httpx.AsyncClient() as async_httpx_client:
+            response = await async_httpx_client.get(urljoin(settings_data.gopeed_url, '/api/v1/info'))
+            if response.status_code != 200:
+                raise GopeedServiceNotWorking(msg="gopeed service not working")
 
 _settings = Settings()
 

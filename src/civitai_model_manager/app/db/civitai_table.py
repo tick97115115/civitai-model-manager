@@ -16,16 +16,6 @@ class Model_Id(SQLModel, table=True):
     model_versions: list["ModelVersion"] = Relationship(back_populates="model", cascade_delete=True)
     tags: list["Model_Tag"] = Relationship(back_populates="model_ids", link_model=ModelIdTagLink)
 
-    # def get_model_folder_path(self) -> Path:
-    #     path = get_model_type_dir(self.type) / str(self.id)
-    #     return path
-    
-    # def save_api_info_json(self) -> None:
-    #     json_path = self.get_model_folder_path() / "api_info.json"
-    #     self.get_model_folder_path().mkdir(parents=True, exist_ok=True)
-    #     with open(json_path, 'w', encoding='utf-8') as f:
-    #         json.dump(self.api_info_model_id, f, indent=2)
-
 class Model_Tag(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str = Field(unique=True, index=True)
