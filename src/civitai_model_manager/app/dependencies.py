@@ -14,7 +14,7 @@ from os.path import join, dirname, exists
 from urllib.parse import urljoin
 import json
 from gospeed_api.index import GospeedAPI
-from .data_model import CivitAI_ModelId, CivitAI_ModelVersion, CivitAI_File, CivitAI_Image
+from .data_model import CivitAI_ModelId, CivitAI_ModelVersion, CivitAI_File, CivitAI_Image, CivitAI_Model_Type
 
 app = FastAPI()
 
@@ -157,29 +157,34 @@ class Settings:
             if response.status_code != 200:
                 raise GopeedServiceNotWorking(msg="gopeed service not working")
 
-    async def get_model_id_path(self, model_id: CivitAI_ModelId):
+    async def get_model_id_path(self, model_type: CivitAI_Model_Type, model_id: int):
         settings = await self.get_json_settings_data()
-        model_id_path = Path(settings.resources_folder) / model_id.type / model_id.id
+        model_id_path = Path(settings.resources_folder) / model_type / str(model_id)
         return model_id_path
 
-    async def get_model_id_json_path(self, model_id: CivitAI_ModelId):
-        model_id_path = await self.get_model_id_path()
-        pass
+    async def get_model_id_json_path(self, model_type: CivitAI_Model_Type, model_id: int):
+        model_id_path = await self.get_model_id_path(model_type, model_id)
+        return model_id_path / f"{model_id}.api_info.json"
     
-    async def get_model_version_path(self, model_id: CivitAI_ModelId, model_version: CivitAI_ModelVersion):
-        pass
+    async def get_model_version_path(self, model_type: CivitAI_Model_Type, model_id: int, model_version: int):
+        model_id_path = await self.get_model_id_path(model_type, model_id)
+        return model_id_path / str(model_version)
 
-    async def get_model_version_json_path(self, model_id: CivitAI_ModelId, model_version: CivitAI_ModelVersion):
-        pass
+    async def get_model_version_json_path(self, model_type: CivitAI_Model_Type, model_id: int, model_version: int):
+        model_version_path = await self.get_model_version_path(model_type, model_id, model_version)
+        return model_version_path / f"{model_version}.api_info.json"
 
-    async def get_file_name_path(self, model_id: CivitAI_ModelId, model_version: CivitAI_ModelVersion, file: CivitAI_File):
-        pass
+    async def get_file_name_path(self, model_type: CivitAI_Model_Type, model_id: int, model_version: int, file: CivitAI_File):
+        model_version_path = await self.get_model_version_path(model_type, model_id, model_version)
+        return model_version_path / f"{file.id}_{file.name}"
     
-    async def get_file_json_path(self, model_id: CivitAI_ModelId, model_version: CivitAI_ModelVersion, file: CivitAI_File):
-        pass
+    async def get_file_json_path(self, model_type: CivitAI_Model_Type, model_id: int, model_version: int, file: CivitAI_File):
+        model_version_path = await self.get_model_version_path(model_type, model_id, model_version)
+        return model_version_path / f"{file.id}_{file.get_file_name()}.api_info.json"
 
-    async def get_file_preview_img_path(self, model_id: CivitAI_ModelId, model_version: CivitAI_ModelVersion, file: CivitAI_File):
-        pass
+    async def get_file_preview_img_path(self, model_type: CivitAI_Model_Type, model_id: int, model_version: int, file: CivitAI_File, image: CivitAI_Image):
+        model_version_path = await self.get_model_version_path(model_type, model_id, model_version)
+        return model_version_path / f"{file.id}_{file.get_file_name()}.preview.{image.get_image_suffix()}"
 
 _settings = Settings()
 

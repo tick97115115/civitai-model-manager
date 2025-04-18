@@ -30,6 +30,12 @@ class CivitAI_Image(BaseModel):
 
     model_config = ConfigDict(extra='allow')
 
+    def get_image_filename(self) -> str:
+        return self.url.rsplit('/', 1)[-1]
+
+    def get_image_suffix(self) -> str:
+        return self.get_image_filename().rsplit('.', 1)[-1]
+
 class CivitAI_File_Metadata(BaseModel):
     format: str
 
@@ -45,6 +51,9 @@ class CivitAI_File(BaseModel):
     downloadUrl: str
 
     model_config = ConfigDict(extra='allow')
+
+    def get_file_name(self) -> str:
+        return self.name.rsplit('.', 1)[0]
 
 class CivitAI_ModelVersion_Availability(StrEnum):
     EarlyAccess = 'EarlyAccess'
