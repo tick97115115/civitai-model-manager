@@ -1,18 +1,64 @@
 from typing import Sequence
 from sqlmodel import select, col
-from pydantic import StrictInt
-from ...data_model import CivitAI_ModelId
+from pydantic import StrictInt, BaseModel
+from ...data_model import CivitAI_ModelId, CivitAI_File, CivitAI_ModelVersion
 from ...db.civitai_table import Model_Id, ModelVersion, Model_Tag, ModelIdTagLink
 from ...dependencies import DbSessionDep, get_db_session, app
 from ...data_model import API_Response_V1
 import pydash as _
 
+class Add_Model_Version(BaseModel):
+    model_id: CivitAI_ModelId
+    version_id: StrictInt
+    files: list[CivitAI_File]
+
+@app.post("/api/v1/model_versions/add_one/")
+async def add_model_version(model_id: CivitAI_ModelId, model_version: CivitAI_ModelVersion, files: list[CivitAI_File], db_session: DbSessionDep):
+    # verify if modelid exists in db
+    statement = select(Model_Id).where(Model_Id.id == model_id.id)
+    result = db_session.exec(statement)
+    model_id_record = result.one_or_none()
+    if model_id_record is None:
+        # create modelId record
+        model_id_record = Model_Id(
+            id=model_id.id,
+            name=model_id.name,
+            type=model_id.type,
+            nsfw=model_id.nsfw,
+            nsfw_level=model_id.nsfwLevel,
+            api_info_model_id=model_id.model_dump(),
+            model_versions=[],
+            tags=[]
+        )
+        statement = select(Model_Tag).where(col(Model_Tag.name).in_(model_id.tags))
+        result = db_session.exec(statement)
+        model_tag_records = result.all()
+        for tag in model_tag_records:
+            pass
+    # verify if model_version exists in db
+    statement = select(ModelVersion).where(ModelVersion.id == model_version.id)
+    result = db_session.exec(statement)
+    model_version_record = result.first()
+    if model_version_record is None:
+        # create modelVersion record
+        model_version_record = ModelVersion(
+            id=model_version.id,
+            name=model_version.name,
+            base_model=model_version.baseModel,
+            base_model_type=model_version.baseModelType,
+            nsfw_level=model_version.nsfwLevel,
+            model_id=model_id.id,
+            model=model_id_record,
+            api_info_model_version=model_version.model_dump()
+        )
+
+    
+    model_version_record.id = model_id.id
+    # create download task and get task id
+
+
 class Get_Model_Id_Response(API_Response_V1):
     data: None | Model_Id
-
-@app.post("/api/v1/model_versions/add_one/{version_id}")
-async def add_model_version(model_id: CivitAI_ModelId, version_id: int):
-    pass
 
 @app.get("/api/v1/models/{model_id}", response_model=Get_Model_Id_Response)
 def get_model_id(model_id: StrictInt, db_session: DbSessionDep):

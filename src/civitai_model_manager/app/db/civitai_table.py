@@ -28,6 +28,7 @@ class ModelVersion(SQLModel, table=True):
     base_model: str = Field(index=True)
     downloaded: bool = False
     base_model_type: None | str
+    published_at: str
     nsfw_level: int
     model_id: int = Field(foreign_key="model_id.id", ondelete="CASCADE")
     model: Model_Id = Relationship(back_populates="model_versions")
