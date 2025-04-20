@@ -24,7 +24,7 @@ export const modelVersion_file = type({
     metadata: {
         "fp?": "string | null", // '"fp8" | "fp16" | "fp32"',
         "size?": "string | null", // '"full" | "pruned"',
-        format: "string", // '"SafeTensor" | "PickleTensor" | "Other" | "Diffusers" | "GGUF"',
+        "format?": "string", // '"SafeTensor" | "PickleTensor" | "Other" | "Diffusers" | "GGUF"',
     },
     scannedAt: "string | null", //ISO 8061
     "hashes?": modelVersion_file_hashes,
@@ -49,7 +49,7 @@ export const model_version = type({
     name: "string",
     baseModel: "string",
     baseModelType: "string | null",
-    publishedAt: "string.date", //ISO 8061
+    publishedAt: "string.date | null", //ISO 8061
     availability: "'EarlyAccess' | 'Public'",
     nsfwLevel: "number.integer",
     description: "string | null", //html doc strings

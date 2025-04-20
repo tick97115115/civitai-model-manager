@@ -20,11 +20,11 @@
                         <el-menu-item index="1-2">item two</el-menu-item>
                     </el-menu-item-group>
                 </el-sub-menu> -->
-                <el-menu-item index="1">
+                <el-menu-item index="1" @click="router.push('/')">
                     <el-icon><Box /></el-icon>
                     <span>Models</span>
                 </el-menu-item>
-                <el-menu-item index="2">
+                <el-menu-item index="2" @click="router.push('/downloads')">
                     <el-icon><Download /></el-icon>
                     <span>Downloads</span>
                 </el-menu-item>
@@ -40,6 +40,10 @@ import {
     Location,
     Setting,
 } from "@element-plus/icons-vue";
+
+import { useRoute, useRouter } from "vue-router";
+const router = useRouter();
+
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath);
 };
