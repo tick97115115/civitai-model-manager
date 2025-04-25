@@ -7,84 +7,11 @@ from ...dependencies import DbSessionDep, get_db_session, app
 from ...data_model import API_Response_V1
 import pydash as _
 
-class Add_Model_Version(BaseModel):
-    model_id: CivitAI_ModelId
-    version_id: StrictInt
-    files: list[CivitAI_File]
-
-@app.post("/api/v1/model_versions/add_one/")
-async def add_model_version(model_id: CivitAI_ModelId, model_version: CivitAI_ModelVersion, files: list[CivitAI_File], db_session: DbSessionDep):
-    # verify if modelid exists in db
-    statement = select(Model_Id).where(Model_Id.id == model_id.id)
-    result = db_session.exec(statement)
-    model_id_record = result.one_or_none()
-    if model_id_record is None:
-        # create modelId record
-        model_id_record = Model_Id(
-            id=model_id.id,
-            name=model_id.name,
-            type=model_id.type,
-            nsfw=model_id.nsfw,
-            nsfw_level=model_id.nsfwLevel,
-            api_info_model_id=model_id.model_dump(),
-            model_versions=[],
-            tags=[]
-        )
-        statement = select(Model_Tag).where(col(Model_Tag.name).in_(model_id.tags))
-        result = db_session.exec(statement)
-        model_tag_records = result.all()
-        for tag in model_tag_records:
-            pass
-    # verify if model_version exists in db
-    statement = select(ModelVersion).where(ModelVersion.id == model_version.id)
-    result = db_session.exec(statement)
-    model_version_record = result.first()
-    if model_version_record is None:
-        # create modelVersion record
-        model_version_record = ModelVersion(
-            id=model_version.id,
-            name=model_version.name,
-            base_model=model_version.baseModel,
-            base_model_type=model_version.baseModelType,
-            nsfw_level=model_version.nsfwLevel,
-            model_id=model_id.id,
-            model=model_id_record,
-            api_info_model_version=model_version.model_dump()
-        )
-
-    
-    model_version_record.id = model_id.id
-    # create download task and get task id
-
-
-class Get_Model_Id_Response(API_Response_V1):
-    data: None | Model_Id
-
-@app.get("/api/v1/models/{model_id}", response_model=Get_Model_Id_Response)
-def get_model_id(model_id: StrictInt, db_session: DbSessionDep):
-    statement = select(Model_Id).where(Model_Id.id == model_id)
-    result = db_session.exec(statement)
-
-    data = result.first()
-
-    if data != None:
-        return Get_Model_Id_Response(
-            code=200,
-            message="success",
-            data=data
-        )
-    else:
-        return Get_Model_Id_Response(
-            code=404,
-            message="Not Found",
-            data=data
-        )
-    
 class Get_Tags_Response(API_Response_V1):
     data: Sequence[Model_Tag]
 
-@app.get("/api/v1/tags", response_model=Get_Tags_Response)
-def get_tags(db_session: DbSessionDep) -> Get_Tags_Response:
+@app.get("/api/v1/local/tags", response_model=Get_Tags_Response)
+def get_all_tags(db_session: DbSessionDep) -> Get_Tags_Response:
     statement = select(Model_Tag)
     result = db_session.exec(statement)
     return Get_Tags_Response(
@@ -96,6 +23,7 @@ def get_tags(db_session: DbSessionDep) -> Get_Tags_Response:
 class Find_Tags_Response(API_Response_V1):
     data: Sequence[Model_Tag]
 
+@app.post("/api/v1/local/tags/find", response_model=Find_Tags_Response)
 def find_tags(tags: list[str], db_session: DbSessionDep) -> Find_Tags_Response:
     statement = select(Model_Tag).where(col(Model_Tag.name).in_(tags))
     result = db_session.exec(statement)
@@ -108,7 +36,7 @@ def find_tags(tags: list[str], db_session: DbSessionDep) -> Find_Tags_Response:
 class Find_Model_Ids_By_Tags_Response(API_Response_V1):
     data: Sequence[Model_Id]
 
-@app.post("/api/v1/tags", response_model=Find_Model_Ids_By_Tags_Response)
+@app.post("/api/v1/local/model_ids_by_tags", response_model=Find_Model_Ids_By_Tags_Response)
 def find_model_ids_by_tags(tags: list[str], db_session: DbSessionDep) -> Find_Model_Ids_By_Tags_Response:
     statement = select(Model_Id).join(ModelIdTagLink).join(Model_Tag).where(col(Model_Tag.name).in_(tags)).distinct()
     result = db_session.exec(statement)
@@ -146,10 +74,35 @@ def find_or_create_tags(tags: list[str], db_session: DbSessionDep) -> list[Model
             db_session.add(created_tag)
             tags_list.append(created_tag)
         db_session.commit()
+        for tag in tags_list:
+            db_session.refresh(tag)
     tags_list.extend(existed_tags)
     return tags_list
 
-def create_model_id(model_id: CivitAI_ModelId, db_session: DbSessionDep) -> Model_Id:
+class Get_Model_Id_Response(API_Response_V1):
+    data: None | Model_Id
+
+@app.get("/api/v1/local/model_id/{model_id}", response_model=Get_Model_Id_Response)
+def find_one_model_id(model_id: StrictInt, db_session: DbSessionDep):
+    statement = select(Model_Id).where(Model_Id.id == model_id)
+    result = db_session.exec(statement)
+
+    data = result.first()
+
+    if data != None:
+        return Get_Model_Id_Response(
+            code=200,
+            message="success",
+            data=data
+        )
+    else:
+        return Get_Model_Id_Response(
+            code=404,
+            message="Not Found",
+            data=data
+        )
+    
+def create_one_model_id(model_id: CivitAI_ModelId, db_session: DbSessionDep) -> Model_Id:
     tags = find_or_create_tags(model_id.tags, db_session=db_session)
     model_id_record = Model_Id(
         id=model_id.id,
@@ -166,7 +119,7 @@ def create_model_id(model_id: CivitAI_ModelId, db_session: DbSessionDep) -> Mode
     db_session.refresh(model_id_record)
     return model_id_record
 
-def update_model_id(model_id: CivitAI_ModelId, model_id_record: Model_Id, db_session: DbSessionDep) -> Model_Id:
+def update_one_model_id(model_id: CivitAI_ModelId, model_id_record: Model_Id, db_session: DbSessionDep) -> Model_Id:
     model_id_record.name = model_id.name
     model_id_record.type = model_id.type
     model_id_record.nsfw = model_id.nsfw
@@ -178,19 +131,32 @@ def update_model_id(model_id: CivitAI_ModelId, model_id_record: Model_Id, db_ses
         new_tag = find_or_create_tag(tag_name=lacked_tag, db_session=db_session)
         model_id_record.tags.append(new_tag)
     tags_been_removed = _.difference(db_tags, model_id.tags)
-    for removed_tag in tags_been_removed:
-        _tag = find_or_create_tag(tag_name=removed_tag, db_session=db_session)
-        _tag.model_ids.remove(model_id_record)
+    tags_been_removed_records = find_or_create_tags(tags=tags_been_removed, db_session=db_session)
+    for removed_tag_record in tags_been_removed_records:
+        removed_tag_record.model_ids.remove(model_id_record)
     db_session.add(model_id_record)
     db_session.commit()
     db_session.refresh(model_id_record)
     return model_id_record
 
-def update_or_create_model_id(model_id: CivitAI_ModelId, db_session: DbSessionDep) -> Model_Id:
-    res = get_model_id(model_id=model_id.id, db_session=db_session)
+class CreateOrUpdateOneModelId(API_Response_V1):
+    data: Model_Id
+
+@app.post("/api/v1/local/model_id/create_or_update_one", response_model=CreateOrUpdateOneModelId)
+def create_or_update_one_model_id(model_id: CivitAI_ModelId, db_session: DbSessionDep) -> CreateOrUpdateOneModelId:
+    res = find_one_model_id(model_id=model_id.id, db_session=db_session)
     if (res.data == None):
-        return create_model_id(model_id=model_id, db_session=db_session)
+        model_id_record = create_one_model_id(model_id=model_id, db_session=db_session)
+        return CreateOrUpdateOneModelId(
+            code=201,
+            message="One new modelId created",
+            data=model_id_record
+        )
     else:
-        model_id_record = update_model_id(model_id=model_id, model_id_record=res.data, db_session=db_session)
-    return model_id_record
-    
+        model_id_record = update_one_model_id(model_id=model_id, model_id_record=res.data, db_session=db_session)
+        return CreateOrUpdateOneModelId(
+            code=200,
+            message="One existed modelId updated",
+            data=model_id_record
+        )
+

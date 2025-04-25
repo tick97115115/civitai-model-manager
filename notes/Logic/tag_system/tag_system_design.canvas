@@ -1,0 +1,8 @@
+{
+	"nodes":[
+		{"id":"ee75a1c833497873","x":-158,"y":-35,"width":250,"height":60,"type":"text","text":"How they store?"},
+		{"id":"a6ffb88f61a2e35e","x":261,"y":-34,"width":250,"height":60,"type":"text","text":"What tag should we use?"},
+		{"id":"096baa52809ee13a","x":680,"y":-34,"width":250,"height":60,"type":"text","text":"how we classify tags?\n- character\n- "}
+	],
+	"edges":[]
+}

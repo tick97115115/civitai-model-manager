@@ -5,7 +5,7 @@ import httpx
 from sqlmodel import select
 from pydantic import StrictInt
 from gospeed_api.models import Request_Extra_Opt, CreateTask_DownloadOpt
-from .local_models import get_model_id, find_or_create_tags
+from .local_models import find_one_model_id, find_or_create_tags
 import pydash as _
 from ...db.civitai_table import ModelVersionImage, ModelVersion
 from ...db.gopeed_table import ModelVersionGopeedTask, ModelVersionFileGopeedTask, ModelVersionImageGopeedTask
@@ -24,7 +24,7 @@ class TaskConsumer:
             if self.current_task != None:
                 for image_task in self.current_task.image_tasks:
                     img = httpx.get(url=image_task.image_api_info.url)
-                    get_model_id()
+                    find_one_model_id()
 
 class API_Response_V1_GopeedTasks(API_Response_V1):
     data: Sequence[ModelVersionGopeedTask]
